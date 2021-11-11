@@ -85,30 +85,22 @@ class Car {
     this.tank += gallons;
   }
   drive(distance){
-    // for(let i = 0; i < distance; i++){
-    //   if(this.tank <= 0){
-    //     this.tank = 0;
-    //     return `I ran out of fuel at ${this.odometer} miles!`;
-    //   } else{
-    //     this.odometer++;
-    //     this.tank -= (1 / this.milesPerGallon).toFixed(2);
-    //     console.log(this.tank);
-    //   }
-    // }
-    let gallonsRequired = distance * this.milesPerGallon;
-    if(this.tank < gallonsRequired){
+    let drivableDistance = this.milesPerGallon * this.tank;
+    if(this.tank === 0){
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }else if(drivableDistance < distance){
+      this.odometer += drivableDistance;
       this.tank = 0;
-      this.odometer += 0;
       return `I ran out of fuel at ${this.odometer} miles!`;
     }else {
-      this.tank += gallonsRequired;
+      this.tank -= distance / this.milesPerGallon;
       this.odometer += distance;
     }
   }
 }
-const myCar = new Car('buggy', 20);
+const myCar = new Car('buggy', 10);
 myCar.fill(10);
-myCar.drive(50);
+myCar.drive(60);
 console.log(myCar.odometer);
 console.log(myCar.tank);
 
