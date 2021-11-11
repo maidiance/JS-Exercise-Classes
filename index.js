@@ -87,14 +87,20 @@ class Car {
   drive(distance){
     for(let i = 0; i < distance; i++){
       if(this.tank <= 0){
+        this.tank = 0;
         return `I ran out of fuel at ${this.odometer} miles!`;
       } else{
         this.odometer++;
-        this.tank -= (1 / this.milesPerGallon).toFixed(2);
+        this.tank -= 1 / this.milesPerGallon;
       }
     }
   }
 }
+const myCar = new Car('buggy', 20);
+myCar.fill(10);
+myCar.drive(50);
+console.log(myCar.odometer);
+console.log(myCar.tank);
 
 /*
   TASK 3
