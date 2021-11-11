@@ -98,11 +98,11 @@ class Car {
     }
   }
 }
-const myCar = new Car('buggy', 10);
-myCar.fill(10);
-myCar.drive(60);
-console.log(myCar.odometer);
-console.log(myCar.tank);
+// const myCar = new Car('buggy', 10);
+// myCar.fill(10);
+// myCar.drive(60);
+// console.log(myCar.odometer);
+// console.log(myCar.tank);
 
 /*
   TASK 3
@@ -170,10 +170,41 @@ class Instructor extends Lambdasian{
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-   
+class Student extends Lambdasian{
+   constructor(obj){
+     super(obj);
+     this.previousBackground = obj.previousBackground;
+     this.className = obj.className;
+     this.favSubjects = obj.favSubjects;
+   }
+   listSubjects(){
+      let string = "Loving ";
+      let length = this.favSubjects.length;
+      this.favSubjects.map(function(item, index){
+        if(index != length - 1){
+          string += item + ", ";
+        } else {
+          string += item + "!";
+        }
+      });
+      return string;
+   }
+   PRAssignment(subject){
+     return `${this.name} has submitted a PR for ${subject}`
+   }
+   sprintChallenge(subject){
+     return `${this.name} has begun sprint challenge on ${subject}`
+   }
 }
-
+const myStudent = new Student({
+  name: 'test',
+  age: 20,
+  location: 'USA',
+  previousBackground: 'art',
+  className: 'web50',
+  favSubjects: ['javascript', 'HTML', 'CSS'],
+});
+console.log(myStudent.listSubjects());
 /*
   TASK 6
     - Write a ProjectManager class extending Instructor.
